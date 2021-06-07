@@ -1,0 +1,37 @@
+<?php
+
+if (isset($_POST["send"])) {
+
+	$to = $_POST["to"];
+	$subject = $_POST["subject"];
+	$message = $_POST["message"];
+	$from = $_POST["from"];
+	$name = $_POST["name"];
+
+	if (!(filter_var($to, FILTER_VALIDATE_EMAIL) && filter_var($from, FILTER_VALIDATE_EMAIL))) {
+		echo "Email address inputs invalid";
+		 die();
+	} 
+
+	$header = "From: " .  $name . " <" . $from . ">\r\nMIME-Version: 1.0\r\nContent-type: text/html\r\n";
+
+	$retval = mail ($to, $subject, $message, $header);
+
+	if ($retval) {
+		echo "Email sent.";
+	} else {
+		echo "Email did not send. Error: " . $retval;
+	}
+} else {
+	echo 
+	'<html>
+		<head>
+			<style> 
+				input[type=submit] {
+				  background-color: #4CAF50;
+				  border: none;
+				  color: white;
+				  padding: 14px 32px;
+				  text-decoration: none;
+				  margin: 4px 2px;
+				  cursor: p

